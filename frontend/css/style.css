@@ -1,0 +1,97 @@
+body{
+    font-family: monospace;
+    font-size: larger;
+    background-color: white;
+}
+table {
+    border-collapse: collapse;
+}
+h1{
+    text-align: center;
+}
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    justify-content : space-between;
+}
+.navbar button{
+    float: left;
+    padding: 12px;
+    color:black;
+    background-color:green;
+    font-family: monospace;
+    text-decoration: none;
+    font-size: 17px;
+    width: 20%; 
+    text-align: center;
+
+}
+.visited{
+    font-family:Arial, Helvetica, sans-serif;
+    width: 20px;
+    height: 20px;
+    animation-name: visanimation;
+    animation-duration: 1.5s;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state:running;
+    border: 1px solid black;
+}
+@keyframes visanimation {
+    0%{
+        transform: scale(.3);
+        background-color: aqua;
+        border-radius: 100%;
+    }
+    50%{
+        background-color: aquamarine;
+    }
+    75%{
+        transform: scale(1.2);
+        background-color: cornflowerblue;
+    }
+    100%{
+        transform: scale(1.0);
+        background-color: blueviolet;
+    }
+}
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-family:monospace;
+    color: white;
+    text-align: center;
+    font-size: 25px;
+    background-color :black;
+}
+.grid{
+    padding-top: 2%;
+}
+.box {
+    font-family:Arial, Helvetica, sans-serif;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #333333;
+    cursor: pointer;
+    font-size: 10px;
+    transition: .3s;
+    background-color :white;
+}
+.wall{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #333333;
+    background-color: black;
+    transition: .3s;
+}
+footer{
+    font-family: monospace;
+    background-color: coral ;
+    position: fixed;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
