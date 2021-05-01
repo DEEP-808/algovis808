@@ -39,6 +39,20 @@ h1{
     animation-play-state:running;
     border: 1px solid black;
 }
+.start{
+    background-color: red;
+}
+.end{
+    background-color: green;
+}
+.shortestpath{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 20px;
+    height: 20px;
+    transition-duration: 0.5s;
+    background-color: yellow;
+    border: 1px solid black;
+}
 @keyframes visanimation {
     0%{
         transform: scale(.3);
