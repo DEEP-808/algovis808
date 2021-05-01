@@ -5,6 +5,8 @@ var xdir=[-1,0,1,0];
 var ydir=[0,1,0,-1];
 var dxdir=[0,1,0,-1];
 var dydir=[-1,0,1,0];
+var truePath="";
+var pathtaken=[];
 var vis = new Array(21);
 var isMousedown = false;
 
@@ -117,13 +119,19 @@ function inside(ti,tj){
 }
 
 
+
 function startbfs(){
 	console.log(vis);
 	setvisF();
 	if((s==1||s==2) && scount==2)
 	{
 		var q = new Array();
-		q.push(sid[0]);
+		var curpath = String(sid[0]);
+		var cnode={
+			"id" : sid[0],
+			"path":curpath
+		}
+		q.push(cnode);
 		var sindx=sid[0].split('/');
 		var x=parseInt(sindx[0]);
 		var y=parseInt(sindx[1]);
@@ -134,7 +142,8 @@ function startbfs(){
 		console.log(vis[x][y]);
 		while(q.length!=0)
 		{
-			var temp=q[0].split("/");
+			var tnode=q[0];
+			var temp=tnode.id.split("/");
 			let d=0;
 			q.shift();
 			var qx=parseInt(temp[0]);
@@ -152,36 +161,46 @@ function startbfs(){
 					var currentId=ti+"/"+tj;
 					var changecell=document.getElementById(currentId);
 					visitedIdx.push(currentId);
+					var nextPath=tnode.path+"."+currentId;
+					var nnode={
+						"id":currentId,
+						"path" : nextPath
+					}
 					if(currentId==sid[1])
 					{
 						d=1;
+						pathtaken=nnode.path;
 						break;
 					}
 					cnt++;
-					q.push(currentId);
+					q.push(nnode);
 				}
 			}
 			if(d==1)
 			break;
 		}
-		changeVis(visitedIdx);
+		//var result=0;
+		//console.log(result);
+		changeVis(visitedIdx,pathtaken);
 	}
 }
 
 
-function changeVis(visitedIdx)
+function changeVis(visitedIdx,pathtaken)
 {
 	console.log(visitedIdx);
 	var d=0;
-	for(let i=1;i<visitedIdx.length-1;i++)
+	for(let i=1;i<visitedIdx.length;i++)
 	{
 			setTimeout(function(){
-				console.log(i);
+				//console.log(i);
 				let one=visitedIdx[i];
 				console.log(one)
 				if(one==sid[1])
 				{
 					d=1;
+					console.log("mark em darn it");
+					markshortestpath(pathtaken);
 				}
 				var two=document.getElementById(one);
 				two.setAttribute('class','visited');
@@ -189,8 +208,40 @@ function changeVis(visitedIdx)
 			if(d==1)
 			break;
 	}
+	
 }
 
+function clearall(){
+	
+	s=0;
+ 	scount=0;
+ 	sid=[];
+	pathtaken=[];
+	for(let i=0;i<21;i++)
+	{
+		for(let j=0;j<70;j++)
+		{
+			let curg=document.getElementById(i+'/'+j);
+			curg.setAttribute('class',"box");
+			curg.style.removeProperty('background-color');
+		}
+	}
+}
+
+
+function markshortestpath(pathtaken)
+{
+	
+	var arr=pathtaken.split(".");
+	for(let i=0;i<arr.length;i++)
+	{
+		setTimeout(function(){
+			let one=arr[i];
+			var two=document.getElementById(one);
+			two.setAttribute("class",'shortestpath');
+		},i*100);
+	}
+}
 
 function fillcell(){
    if(s==1 && scount<2)
@@ -274,7 +325,6 @@ function startdfs()
 			}
 		}
 	}
-	changeVis(visitedIdx);
 }
 
 
