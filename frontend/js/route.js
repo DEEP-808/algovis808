@@ -211,6 +211,29 @@ function changeVis(visitedIdx,pathtaken)
 	
 }
 
+function changeVisdfs(visitedIdx)
+{
+	console.log(visitedIdx);
+	var d=0;
+	for(let i=2;i<visitedIdx.length-1;i++)
+	{
+			setTimeout(function(){
+				//console.log(i);
+				let one=visitedIdx[i];
+				console.log(one)
+				if(one==sid[1])
+				{
+					d=1;
+				}
+				var two=document.getElementById(one);
+				two.setAttribute('class','visited');
+			},25*i)
+			if(d==1)
+			break;
+	}
+	
+}
+
 function clearall(){
 	
 	s=0;
@@ -283,11 +306,12 @@ function set(){
 function startdfs()
 {
 	setvisF();
-	if(s==1||s==2 && scount==2)
+	if((s==1||s==2) && scount==2)
 	{
 		let st = new Array();
 		let d=0;
 		st.push(sid[0]);
+		console.log(sid);
 		var stid=sid[0].split('/');
 		let x=parseInt(stid[0]);
 		let y = parseInt(stid[1]);
@@ -324,6 +348,7 @@ function startdfs()
 				st.push(currentId);
 			}
 		}
+		changeVisdfs(visitedIdx);
 	}
 }
 
